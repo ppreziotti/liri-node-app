@@ -4,6 +4,7 @@ var twitter = require("twitter");
 var keys = require("./keys.js");
 var spotify = require("spotify");
 var request = require("request");
+var fs = require("fs");
 var input = process.argv[2];
 
 // FUNCTIONS
@@ -112,6 +113,29 @@ function getMovie() {
   }
 }
 
+function doRandom() {
+  process.argv = ["node", "liri.js",];
+  fs.readFile("./random.txt", "utf-8", function(error, data) {
+  	if (error) {
+  	  console.log(error);
+  	}
+  	var text = data.split(",");
+  	for (var i = 0; i < text.length; i++) {
+  	  process.argv.push(text[i]);
+  	}
+  	input = process.argv[2];
+  	if (input === "my-tweets") {
+  	  getTweets();
+    }
+	if (input === "spotify-this-song") {
+  	  getSong();
+	}
+	if (input === "movie-this") {
+  	  getMovie();
+	}
+  });
+}
+
 // MAIN PROCESS
 // ==================================================================================
 if (input === "my-tweets") {
@@ -124,4 +148,8 @@ if (input === "spotify-this-song") {
 
 if (input === "movie-this") {
   getMovie();
+}
+
+if (input === "do-what-it-says") {
+  doRandom();
 }
