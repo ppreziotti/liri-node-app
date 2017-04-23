@@ -30,8 +30,31 @@ function getTweets() {
   });
 }
 
+function getSong() {
+  var args = process.argv;
+  var inputArray = [];
+  for (var i = 3; i < args.length; i++) {
+  	inputArray.push(args[i]);
+  }
+  var song = inputArray.join(" ");
+  console.log(song);
+  spotify.search({type: 'track', query: song}, function(err, data) {
+  	if (err) {
+  	  console.log(err);
+  	}
+	console.log(data.tracks.items[0].artists[0].name);
+	console.log(data.name);
+	console.log(data.preview_url);
+	console.log(data.album);
+  });
+}
+
 // MAIN PROCESS
 // ==================================================================================
 if (input === "my-tweets") {
   getTweets();
+}
+
+if (input === "spotify-this-song") {
+  getSong();
 }
