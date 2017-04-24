@@ -12,9 +12,9 @@ var input = process.argv[2];
 function getTweets() {
   // Importing twitter keys
   var client = new twitter({
-	consumer_key: keys.twitterKeys.consumer_key,
-	consumer_secret: keys.twitterKeys.consumer_secret,
-	access_token_key: keys.twitterKeys.access_token_key,
+	  consumer_key: keys.twitterKeys.consumer_key,
+	  consumer_secret: keys.twitterKeys.consumer_secret,
+	  access_token_key: keys.twitterKeys.access_token_key,
     access_token_secret: keys.twitterKeys.access_token_secret
   });
   var params = {screen_name: 'fakeAccount0090'};
@@ -25,8 +25,8 @@ function getTweets() {
   	// Pulling the tweet's text and time they were created at from the appropriate
   	// screen name...need to update to last 20 once I have enough tweets
   	for (var i = 0; i < tweets.length; i++) {
-	  console.log(tweets[i].text);
-	  console.log(tweets[i].created_at);
+	    console.log(tweets[i].text);
+	    console.log(tweets[i].created_at);
   	}
   });
   logData();
@@ -49,12 +49,12 @@ function getSong() {
 	  console.log("Album: " + data.album.name);
   	});
   }
-  // If a song was entered use the spotify API search method and use the first result
+  // If a song was entered use the spotify API search method and return the first result
   else {
   	var inputArray = [];
 	  for (var i = 3; i < args.length; i++) {
-	    inputArray.push(args[i]);
-	  }
+      inputArray.push(args[i]);
+    }
   	var song = inputArray.join(" ");
 	  spotify.search({type: 'track', query: song}, function(err, data) {
    	  if (err) {
@@ -116,6 +116,7 @@ function getMovie() {
   logData();
 }
 
+// Reads the random.txt file and converts its content into a node command
 function doRandom() {
   process.argv = ["node", "liri.js",];
   fs.readFile("./random.txt", "utf-8", function(error, data) {
@@ -150,7 +151,7 @@ function logData() {
     else {
       console.log("Succesfully logged!");
     }
-  })
+  });
 }
 
 // MAIN PROCESS
