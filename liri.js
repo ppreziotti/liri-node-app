@@ -24,12 +24,19 @@ function getTweets() {
   	}
   	// Pulling the tweet's text and time they were created at from the appropriate
   	// screen name...need to update to last 20 once I have enough tweets
+    // Create an empty array and push the tweets' text/time to the array
+    var outputArray = [];
   	for (var i = 0; i < tweets.length; i++) {
-	    console.log(tweets[i].text);
-	    console.log(tweets[i].created_at);
+	    outputArray.push(tweets[i].text);
+	    outputArray.push(tweets[i].created_at);
   	}
+    // Display the outputArray one index at a time on separate lines
+    for (var i = 0; i < outputArray.length; i++) {
+      console.log(outputArray[i]);
+    }
+    // Append the outputArray to log.txt
+    logData(outputArray);
   });
-  logData();
 }
 
 function getSong() {
@@ -42,11 +49,19 @@ function getSong() {
   	  if (err) {
   	  	console.log(err);
   	  }
-  	  // Display the artist name, song name, preview link, and album name
-	  console.log("Artist: " + data.artists[0].name);
-	  console.log("Song: " + data.name);
-	  console.log("Preview URL: " + data.preview_url);
-	  console.log("Album: " + data.album.name);
+      // Create an empty array and then push the artist name, song name, preview link,
+      // and album name to the array
+      var outputArray = [];
+	    outputArray.push("Artist: " + data.artists[0].name);
+	    outputArray.push("Song: " + data.name);
+	    outputArray.push("Preview URL: " + data.preview_url);
+	    outputArray.push("Album: " + data.album.name);
+      // Display the array one index at a time on separate lines
+      for (var i = 0; i < outputArray.length; i++) {
+        console.log(outputArray[i]);
+      }
+      // Append the outputArray to log.txt
+      logData(outputArray);
   	});
   }
   // If a song was entered use the spotify API search method and return the first result
@@ -60,14 +75,21 @@ function getSong() {
    	  if (err) {
    	    console.log(err);
   	  }
-  	  // Display the artist name, song name, preview link, and album name
-  	  console.log("Artist: " + data.tracks.items[0].artists[0].name);
-  	  console.log("Song: " + data.tracks.items[0].name);
-  	  console.log("Preview URL: " + data.tracks.items[0].preview_url);
-  	  console.log("Album: " + data.tracks.items[0].album.name);
+      // Create an empty array and then push the artist name, song name, preview link,
+      // and album name to the array
+      var outputArray = [];
+      outputArray.push("Artist: " + data.tracks.items[0].artists[0].name);
+      outputArray.push("Song: " + data.tracks.items[0].name);
+      outputArray.push("Preview URL: " + data.tracks.items[0].preview_url);
+      outputArray.push("Album: " + data.tracks.items[0].album.name);
+  	  // Display the array one index at a time on separate lines
+  	  for (var i = 0; i < outputArray.length; i++) {
+        console.log(outputArray[i]);
+      }
+      // Append the outputArray to log.txt
+      logData(outputArray);
   	});
   }
-  logData();
 }
 
 function getMovie() {
@@ -77,14 +99,22 @@ function getMovie() {
   	var movieId = "tt0485947";
   	request("http://www.omdbapi.com/?i=" + movieId + "&r=json&tomatoes=true", function(error, response, body) {
   	  if (!error && response.statusCode === 200) {
-  	  	console.log("Title: " + JSON.parse(body).Title);
-  	  	console.log("Year: " + JSON.parse(body).Year);
-  	  	console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-  	  	console.log("Country: " + JSON.parse(body).Country);
-  	  	console.log("Language: " + JSON.parse(body).Language);
-  	  	console.log("Plot: " + JSON.parse(body).Plot);
-  	  	console.log("Actors: " + JSON.parse(body).Actors);
-  	  	console.log("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
+        // Create an empty array and push the required movie info to it
+        var outputArray = [];
+  	  	outputArray.push("Title: " + JSON.parse(body).Title);
+  	  	outputArray.push("Year: " + JSON.parse(body).Year);
+  	  	outputArray.push("IMDB Rating: " + JSON.parse(body).imdbRating);
+  	  	outputArray.push("Country: " + JSON.parse(body).Country);
+  	  	outputArray.push("Language: " + JSON.parse(body).Language);
+  	  	outputArray.push("Plot: " + JSON.parse(body).Plot);
+  	  	outputArray.push("Actors: " + JSON.parse(body).Actors);
+  	  	outputArray.push("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
+        // Display the output array one index at a time on separate lines
+        for (var i = 0; i < outputArray.length; i++) {
+          console.log(outputArray[i]);
+        }
+        // Append the outputArray to log.txt
+        logData(outputArray);
   	  }
   	  else {
   	  	console.log(error);
@@ -99,21 +129,28 @@ function getMovie() {
     var movieTitle = inputArray.join(" ");
   	request("http://www.omdbapi.com/?t=" + movieTitle + "&r=json&tomatoes=true", function(error, response, body) {
   	  if (!error && response.statusCode === 200) {
-  	  	console.log("Title: " + JSON.parse(body).Title);
-  	  	console.log("Year: " + JSON.parse(body).Year);
-  	  	console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-  	  	console.log("Country: " + JSON.parse(body).Country);
-  	  	console.log("Language: " + JSON.parse(body).Language);
-  	  	console.log("Plot: " + JSON.parse(body).Plot);
-  	  	console.log("Actors: " + JSON.parse(body).Actors);
-  	  	console.log("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
+        // Create an empty array and push the required movie info to it
+        var outputArray = [];
+  	  	outputArray.push("Title: " + JSON.parse(body).Title);
+  	  	outputArray.push("Year: " + JSON.parse(body).Year);
+  	  	outputArray.push("IMDB Rating: " + JSON.parse(body).imdbRating);
+  	  	outputArray.push("Country: " + JSON.parse(body).Country);
+  	  	outputArray.push("Language: " + JSON.parse(body).Language);
+  	  	outputArray.push("Plot: " + JSON.parse(body).Plot);
+  	  	outputArray.push("Actors: " + JSON.parse(body).Actors);
+  	  	outputArray.push("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
+        // Display the output array one index at a time on separate lines
+        for (var i = 0; i < outputArray.length; i++) {
+          console.log(outputArray[i]);
+        }
+        // Append the outputArray to log.txt
+        logData(outputArray);
   	  }
   	  else {
   	  	console.log(error);
   	  }
   	});
   }
-  logData();
 }
 
 // Reads the random.txt file and converts its content into a node command
@@ -138,13 +175,11 @@ function doRandom() {
   	  getMovie();
 	  }
   });
-  logData();
 }
 
 // Appends the output data for a command to the log.txt file
-// Work in progress - currently using "Succesfully logged!" as a placeholder
-function logData() {
-  fs.appendFile("./log.txt", "Succesfully logged!", function(error) {
+function logData(output) {
+  fs.appendFile("./log.txt", output, function(error) {
     if (error) {
       console.log(error);
     }
