@@ -195,14 +195,18 @@ if (input === "my-tweets") {
   getTweets();
 }
 
-if (input === "spotify-this-song") {
+else if (input === "spotify-this-song") {
   getSong();
 }
 
-if (input === "movie-this") {
+else if (input === "movie-this") {
   getMovie();
 }
 
-if (input === "do-what-it-says") {
+else if (input === "do-what-it-says") {
   doRandom();
+}
+
+else {
+  console.log("Please enter a valid command.")
 }
