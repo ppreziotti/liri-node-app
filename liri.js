@@ -29,6 +29,7 @@ function getTweets() {
 	  console.log(tweets[i].created_at);
   	}
   });
+  logData();
 }
 
 function getSong() {
@@ -51,21 +52,22 @@ function getSong() {
   // If a song was entered use the spotify API search method and use the first result
   else {
   	var inputArray = [];
-	for (var i = 3; i < args.length; i++) {
-	  inputArray.push(args[i]);
-	}
-  	var song = inputArray.join(" ");
-	spotify.search({type: 'track', query: song}, function(err, data) {
- 	if (err) {
- 	  console.log(err);
+	  for (var i = 3; i < args.length; i++) {
+	    inputArray.push(args[i]);
 	  }
-	  // Display the artist name, song name, preview link, and album name
-	  console.log("Artist: " + data.tracks.items[0].artists[0].name);
-	  console.log("Song: " + data.tracks.items[0].name);
-	  console.log("Preview URL: " + data.tracks.items[0].preview_url);
-	  console.log("Album: " + data.tracks.items[0].album.name);
-	});
+  	var song = inputArray.join(" ");
+	  spotify.search({type: 'track', query: song}, function(err, data) {
+   	  if (err) {
+   	    console.log(err);
+  	  }
+  	  // Display the artist name, song name, preview link, and album name
+  	  console.log("Artist: " + data.tracks.items[0].artists[0].name);
+  	  console.log("Song: " + data.tracks.items[0].name);
+  	  console.log("Preview URL: " + data.tracks.items[0].preview_url);
+  	  console.log("Album: " + data.tracks.items[0].album.name);
+  	});
   }
+  logData();
 }
 
 function getMovie() {
@@ -111,6 +113,7 @@ function getMovie() {
   	  }
   	});
   }
+  logData();
 }
 
 function doRandom() {
@@ -127,13 +130,27 @@ function doRandom() {
   	if (input === "my-tweets") {
   	  getTweets();
     }
-	if (input === "spotify-this-song") {
+	  if (input === "spotify-this-song") {
   	  getSong();
-	}
-	if (input === "movie-this") {
+	  }
+	  if (input === "movie-this") {
   	  getMovie();
-	}
+	  }
   });
+  logData();
+}
+
+// Appends the output data for a command to the log.txt file
+// Work in progress - currently using "Succesfully logged!" as a placeholder
+function logData() {
+  fs.appendFile("./log.txt", "Succesfully logged!", function(error) {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      console.log("Succesfully logged!");
+    }
+  })
 }
 
 // MAIN PROCESS
