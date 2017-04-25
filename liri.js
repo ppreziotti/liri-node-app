@@ -5,7 +5,7 @@ var keys = require("./keys.js");
 var spotify = require("spotify");
 var request = require("request");
 var fs = require("fs");
-var input = process.argv[2];
+var command = process.argv[2];
 
 // FUNCTIONS
 // ==================================================================================
@@ -164,14 +164,14 @@ function doRandom() {
   	for (var i = 0; i < text.length; i++) {
   	  process.argv.push(text[i]);
   	}
-  	input = process.argv[2];
-  	if (input === "my-tweets") {
+  	command = process.argv[2];
+  	if (command === "my-tweets") {
   	  getTweets();
     }
-	  if (input === "spotify-this-song") {
+	  if (command === "spotify-this-song") {
   	  getSong();
 	  }
-	  if (input === "movie-this") {
+	  if (command === "movie-this") {
   	  getMovie();
 	  }
   });
@@ -183,27 +183,24 @@ function logData(output) {
     if (error) {
       console.log(error);
     }
-    else {
-      console.log("Succesfully logged!");
-    }
   });
 }
 
 // MAIN PROCESS
 // ==================================================================================
-if (input === "my-tweets") {
+if (command === "my-tweets") {
   getTweets();
 }
 
-else if (input === "spotify-this-song") {
+else if (command === "spotify-this-song") {
   getSong();
 }
 
-else if (input === "movie-this") {
+else if (command === "movie-this") {
   getMovie();
 }
 
-else if (input === "do-what-it-says") {
+else if (command === "do-what-it-says") {
   doRandom();
 }
 
