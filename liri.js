@@ -35,7 +35,7 @@ function getTweets() {
       console.log(outputArray[i]);
     }
     // Append the outputArray to log.txt
-    logData(outputArray);
+    logData(outputArray.join(", "));
   });
 }
 
@@ -61,7 +61,7 @@ function getSong() {
         console.log(outputArray[i]);
       }
       // Append the outputArray to log.txt
-      logData(outputArray);
+      logData(outputArray.join(", "));
   	});
   }
   // If a song was entered use the spotify API search method and return the first result
@@ -75,19 +75,25 @@ function getSong() {
    	  if (err) {
    	    console.log(err);
   	  }
-      // Create an empty array and then push the artist name, song name, preview link,
-      // and album name to the array
+      // Create an empty array and push the artist name(s) to the array in case there are 
+      // multiple artists
+      var artistArray = [];
+      for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
+        artistArray.push(data.tracks.items[0].artists[i].name);
+      }
+      // Create an empty array and then push the joined artist array, the song name, 
+      // preview link, and album name to the array
       var outputArray = [];
-      outputArray.push("Artist: " + data.tracks.items[0].artists[0].name);
+      outputArray.push("Artist: " + artistArray.join(", "));
       outputArray.push("Song: " + data.tracks.items[0].name);
       outputArray.push("Preview URL: " + data.tracks.items[0].preview_url);
       outputArray.push("Album: " + data.tracks.items[0].album.name);
-  	  // Display the array one index at a time on separate lines
+  	  // Display the output array one index at a time on separate lines
   	  for (var i = 0; i < outputArray.length; i++) {
         console.log(outputArray[i]);
       }
       // Append the outputArray to log.txt
-      logData(outputArray);
+      logData(outputArray.join(", "));
   	});
   }
 }
@@ -114,7 +120,7 @@ function getMovie() {
           console.log(outputArray[i]);
         }
         // Append the outputArray to log.txt
-        logData(outputArray);
+        logData(outputArray.join(", "));
   	  }
   	  else {
   	  	console.log(error);
@@ -144,7 +150,7 @@ function getMovie() {
           console.log(outputArray[i]);
         }
         // Append the outputArray to log.txt
-        logData(outputArray);
+        logData(outputArray.join(", "));
   	  }
   	  else {
   	  	console.log(error);
@@ -177,9 +183,9 @@ function doRandom() {
   });
 }
 
-// Appends the output data for a command to the log.txt file
+// Appends the command's output data to a new line in the log.txt file
 function logData(output) {
-  fs.appendFile("./log.txt", output, function(error) {
+  fs.appendFile("./log.txt", "\n" + output, function(error) {
     if (error) {
       console.log(error);
     }
