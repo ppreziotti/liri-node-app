@@ -17,20 +17,20 @@ function getTweets() {
 	  access_token_key: keys.twitterKeys.access_token_key,
     access_token_secret: keys.twitterKeys.access_token_secret
   });
+  // Pulling tweets from my account, logging an error if there is one
   var params = {screen_name: 'fakeAccount0090'};
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
   	if (error) {
       console.log(error);
   	}
-  	// Pulling the tweet's text and time they were created at from the appropriate
-  	// screen name...need to update to last 20 once I have enough tweets
-    // Create an empty array and push the tweets' text/time to the array
+  	// Pulls the tweet's text and time at which it was created for my last 20 tweets
+    // Each tweet is then pushed to an empty outputArray
     var outputArray = [];
-  	for (var i = 0; i < tweets.length; i++) {
+  	for (var i = 0; i < 20; i++) {
 	    outputArray.push(tweets[i].text);
 	    outputArray.push(tweets[i].created_at);
   	}
-    // Display the outputArray one index at a time on separate lines
+    // Display the outputArray one element at a time on separate lines
     for (var i = 0; i < outputArray.length; i++) {
       console.log(outputArray[i]);
     }
@@ -88,7 +88,7 @@ function getSong() {
       outputArray.push("Song: " + data.tracks.items[0].name);
       outputArray.push("Preview URL: " + data.tracks.items[0].preview_url);
       outputArray.push("Album: " + data.tracks.items[0].album.name);
-  	  // Display the output array one index at a time on separate lines
+  	  // Display the output array one element at a time on separate lines
   	  for (var i = 0; i < outputArray.length; i++) {
         console.log(outputArray[i]);
       }
@@ -115,7 +115,7 @@ function getMovie() {
   	  	outputArray.push("Plot: " + JSON.parse(body).Plot);
   	  	outputArray.push("Actors: " + JSON.parse(body).Actors);
   	  	outputArray.push("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
-        // Display the output array one index at a time on separate lines
+        // Display the output array one element at a time on separate lines
         for (var i = 0; i < outputArray.length; i++) {
           console.log(outputArray[i]);
         }
@@ -145,7 +145,7 @@ function getMovie() {
   	  	outputArray.push("Plot: " + JSON.parse(body).Plot);
   	  	outputArray.push("Actors: " + JSON.parse(body).Actors);
   	  	outputArray.push("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
-        // Display the output array one index at a time on separate lines
+        // Display the output array one element at a time on separate lines
         for (var i = 0; i < outputArray.length; i++) {
           console.log(outputArray[i]);
         }
