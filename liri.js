@@ -24,7 +24,7 @@ function getTweets() {
       console.log(error);
   	}
   	// Pulls the tweet's text and time at which it was created for my last 20 tweets
-    // Each tweet is then pushed to an empty outputArray
+    // Each tweet/time is then pushed to an empty outputArray
     var outputArray = [];
   	for (var i = 0; i < 20; i++) {
 	    outputArray.push(tweets[i].text);
@@ -100,7 +100,8 @@ function getSong() {
 
 function getMovie() {
   var args = process.argv;
-  // If args.length equals 3 then no movie was entered, defualt to "Mr. Nobody"
+  // If args.length equals 3 then no movie was entered, default to "Mr. Nobody" and use
+  // the OMDB API to get the move info
   if (args.length === 3) {
   	var movieId = "tt0485947";
   	request("http://www.omdbapi.com/?i=" + movieId + "&r=json&tomatoes=true", function(error, response, body) {
@@ -127,6 +128,7 @@ function getMovie() {
   	  }
   	});
   }
+  // If a movie was entered use the OMDB API to look up the info for the movie
   else {
   	var inputArray = [];
   	for (var i = 3; i < args.length; i++) {
@@ -159,9 +161,9 @@ function getMovie() {
   }
 }
 
-// Reads the random.txt file and converts its content into a node command
+// Reads the random.txt file and converts its content into command line input
 function doRandom() {
-  process.argv = ["node", "liri.js",];
+  process.argv = ["node", "liri.js"];
   fs.readFile("./random.txt", "utf-8", function(error, data) {
   	if (error) {
   	  console.log(error);
